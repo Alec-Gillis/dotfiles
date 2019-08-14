@@ -1,3 +1,12 @@
+# .bashrc for Ubuntu
+# ========================================================================
+# - https://github.com/Alec-Gillis/dotfiles
+# - alec.d.gillis@gmail.com
+# - never stop viewing source, my friend
+
+# System default
+# ------------------------------------------------------------------------
+
 # System-wide .bashrc file for interactive bash(1) shells.
 
 # To enable the settings / commands in this file for login shells as well,
@@ -70,6 +79,35 @@ if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-no
 	}
 fi
 
+# Options
+# ------------------------------------------------------------------------
+
+### Append to the history file
+shopt -s histappend
+
+### Check the window size after each command & update values($LINES, $COLUMNS) if necessary
+shopt -s checkwinsize
+
+### Better-looking less for binary files
+[ -x /usr/bin/lesspipe  ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+### Bash completion
+[ -f /etc/bash_completion  ] && . /etc/bash_completion
+
+### Disable CTRL-S and CTRL-Q
+## CTRL-S pauses flow-control(XOFF); the terminal accepts inputs but will not show outputs
+## CTRL-Q undoes CTRL-S
+[[ $- =~ i ]] && stty -ixoff -ixon
+
+# Environment variables
+# ------------------------------------------------------------------------
+
+### man bash
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=1000000
+export HISTTIMEFORMAT='%b %d %H:%M:%S: '
+
+export EDITOR=vim
 
 
 #=============================
@@ -80,6 +118,11 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias cd.='cd ..'
+alias cd..='cd ..'
+alias l='ls -alF'
+alias ll='ls -l'
+
 
 # Automatically ls when changing directory
 cd () {
